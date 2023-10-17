@@ -10,19 +10,20 @@ struct CardView: View {
  
             Group{
                 if (isCovered){
-                    RoundedRectangle(cornerRadius: 12)
+                    RoundedRectangle(cornerRadius: 50)
                         .stroke(.blue, lineWidth:2)
                         .fill(.white)
-                        .frame(width: 90, height: 90)
+                        .frame(height: 50)
                         .overlay{
                             Text(item)
                                 .font(.largeTitle)
                         }
+                        
                 }else{
-                    RoundedRectangle(cornerRadius: 12)
+                    RoundedRectangle(cornerRadius: 50)
                         .stroke(.blue, lineWidth:2)
                         .fill(.blue)
-                        .frame(width: 90, height: 90)
+                        .frame(height: 50)
                 }
             }
             .onTapGesture{

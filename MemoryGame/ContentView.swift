@@ -8,10 +8,20 @@
 import SwiftUI
  
 struct ContentView: View {
-    var icons = ["🦊","😎","🐶","🍀","🐪","🎸","👩‍🚒","🌝","🚕","⌛️"]
-    @State var maxCard = 10
+    var icons = ["🦊","😎","🐶","🍀","🐪","🎸","👩‍🚒","🌝","🚕","⌛️","🦊","😎","🐶","🍀","🐪","🎸","👩‍🚒","🌝","🚕","⌛️"]
+    @State var maxCard = 20
     @State var CardNumber: Int = 6
-    var column = [GridItem(.flexible()), GridItem(.flexible())]
+    var column = [GridItem(.flexible(minimum: 120),spacing: 20),
+                  GridItem(.flexible(minimum: 50), spacing:300)]
+    var CardDisplay: some View {
+        ScrollView{
+            Spacer()
+            LazyVGrid(columns: column, content: {
+                ForEach(0...CardNumber-1, id:\.self){i in
+                    CardView(item:icons[i])
+                }
+            })
+        }}
     var cardDelete: some View {
         cardButton(offset: -2, symbol: "-")
     }
@@ -20,23 +30,19 @@ struct ContentView: View {
     }
  
     var body: some View {
+        
         VStack {
             Text("Memory game")
                 .font(.largeTitle)
-            LazyVGrid(columns: column, content: {
-                ForEach(0...CardNumber-1, id:\.self){i in
-                    CardView(item:icons[i])
-                }
-            })
- 
+            CardDisplay
         }
-        .padding(12)
+        
  
         HStack{
             cardDelete
             Spacer()
             cardAdd
-        }
+        }.padding(12)
     }
  
  
